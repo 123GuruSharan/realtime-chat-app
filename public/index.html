@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat App</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Login Screen -->
+  <div id="login-screen" class="screen">
+    <div class="login-card">
+      <h1>Chat App</h1>
+      <p class="subtitle">Enter your details to start chatting</p>
+      <form id="login-form">
+        <input type="text" id="username-input" placeholder="Enter your username" required maxlength="30" autocomplete="off">
+        <label for="room-input">Room name</label>
+        <input type="text" id="room-input" placeholder="Enter or select a room name" maxlength="50" autocomplete="off">
+        <label for="room-select">Quick select room</label>
+        <select id="room-select">
+          <option value="">-- Choose a room --</option>
+          <option value="General">General</option>
+          <option value="Coding">Coding</option>
+          <option value="Gaming">Gaming</option>
+        </select>
+        <button type="submit" id="join-btn">Join Chat</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Chat Screen: three-column layout, max-width wrapper -->
+  <div id="chat-screen" class="screen hidden" data-current-room="">
+    <div class="app-wrapper">
+      <header class="chat-header">
+        <h2>Chat App</h2>
+        <span id="current-room-name" class="room-badge">General</span>
+      </header>
+
+      <div class="chat-layout">
+        <!-- Left: Rooms -->
+        <aside class="sidebar sidebar-rooms">
+          <h3>Rooms</h3>
+          <nav class="rooms-list">
+            <button type="button" class="room-item" data-room="General">General</button>
+            <button type="button" class="room-item" data-room="Coding">Coding</button>
+            <button type="button" class="room-item" data-room="Gaming">Gaming</button>
+          </nav>
+        </aside>
+
+        <!-- Center: Chat -->
+        <main class="chat-main">
+          <div id="messages-container" class="messages-container">
+            <div id="messages"></div>
+            <div id="typing-indicator" class="typing-indicator hidden">
+              <span class="typing-name"></span><span class="typing-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>
+            </div>
+          </div>
+          <form id="message-form" class="message-form">
+            <input type="text" id="message-input" placeholder="Type a message..." autocomplete="off" maxlength="500">
+            <button type="submit" id="send-btn">Send</button>
+          </form>
+        </main>
+
+        <!-- Right: Online users -->
+        <aside class="sidebar sidebar-users">
+          <h3>Online Users</h3>
+          <ul id="online-users-list"></ul>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
